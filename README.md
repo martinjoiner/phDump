@@ -9,11 +9,15 @@ How to use
 1.  Clone the folder /phDump into your project.
 
 2.  At any point in your PHP code you can get the phDump function like this:
+
         include('phDump/phDump.inc.php');
+
     or 
+
         require_once('phDump/phDump.inc.php');
 
-3.  Then you can simply call phDump like this: 
+3.  Then you can simply call phDump like this:
+
         phDump($myVar)
 
 Screenshot
