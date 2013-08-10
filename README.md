@@ -1,7 +1,7 @@
 phDump
 ======
 
-PHP Equivalent Version of CF Dump, Cold Fusion's fantastic debugging feature.
+This is a PHP equivalent version of CFDump, Cold Fusion's fantastic debugging feature.
 
 How to use
 ----------
@@ -18,13 +18,18 @@ How to use
 
 3.  Then you can simply call phDump like this:
 
-        phDump($myVar)
+        phDump($myVar);
 
 Screenshot
 ----------
 
+The image below shows phDump neatly and clearly displaying the complicated data structure returned by Twitter's API, making it easier to understand.
+
 ![Alt text](/docs/phDump-Twitter-Data.png "phDump being used to debug Twitter API data")
 
-It injects CSS and Javascript into the page to make the embedded tables interactive and make the interface a bit sexier.
+It injects CSS and Javascript into the page to make a sexy and interactive interface. Click on any table head or label cell to collapse/expand it. Good for tidying up hectic screens.
 
-This project serves the niche group of devs who code in PHP but have also had the privilege to work with Cold Fusion and love the CFDump native function. 
+Who the chuffing badger wants this?
+-----------------------------------
+
+This project serves the niche group of developers who have worked with Cold Fusion and love the native CFDump function but also code in PHP and want an equivalent. 
