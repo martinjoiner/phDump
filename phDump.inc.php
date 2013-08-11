@@ -40,11 +40,14 @@ class PhDump {
 	    elseif( gettype($content) == "boolean" ){
 	        $html .= $this->printBoolean($content)." <em>(boolean)</em>";
 	    }
+	    elseif( gettype($content) == "object" ){
+	        $html .= $this->printTable($content);
+	    }
 	    else{
 	        if( is_null($content) ){
 	            $html .= '<em>null</em>';
 	        } else {
-	            $html .= $content." <em>(" . gettype( $content ) . ")</em>";
+	            $html .= $content . " <em>(" . gettype( $content ) . ")</em>";
 	        }
 	    }
 	    $html .= '</td></tr>';
@@ -55,12 +58,12 @@ class PhDump {
 	    $varType = gettype($results);
 	    $addClass = '';
 	    $html = "";
-	    $html = '<table class="phDump_table CLASSPLACE"><tbody>';
+	    $html = '<table class="phDump_table CLASSPLACE"><tbody><tr><th class="phDump_caption CLASSPLACE" colspan="2" onClick="phDump_toggleTable(this)">INNERTEXT</th></tr>';
 
 	    $cntRows = 0;
 	    if($varType == "array"){
 	        if( $this->isAssoc($results) ){
-	            $html .= '<tr><th class="phDump_caption CLASSPLACE" colspan="2" onClick="phDump_toggleTable(this)">Associative Array</th></tr>';
+	            $captionText = "Associative Array";
 	            $addClass .= " assocarray";
 	            foreach($results as $key => $value){
 	                 $html .= $this->printTableRow($key,$value,$addClass);
@@ -68,7 +71,7 @@ class PhDump {
 	            }
 
 	        } else {
-	            $html .= '<tr><th class="phDump_caption CLASSPLACE" colspan="2" onClick="phDump_toggleTable(this)">Numeric Array</th></tr>';
+	            $captionText = 'Numeric Array';
 	            $addClass .= " numarray";
 	            for($i = 0; $i < sizeof($results); $i++){
 	                $html .= $this->printTableRow( $i, $results[$i], $addClass );
@@ -77,6 +80,9 @@ class PhDump {
 
 	        }
 	        
+	    } else if ( $varType == "object" ){
+	        $captionText = 'Object';
+	        $addClass .= " object";
 	    } else {
 	        $html .= $this->printTableRow($varType,$results);
 	        $cntRows++;
@@ -88,6 +94,7 @@ class PhDump {
 
 	    $html .= '</tbody></table>';
 	    $html = preg_replace( '/CLASSPLACE/', $addClass, $html );
+	    $html = preg_replace( '/INNERTEXT/', $captionText, $html );
 	    return $html;
 	}
 
@@ -198,6 +205,18 @@ class PhDump {
 	            .phDump_table th.sideheader.numarray:hover{
 	            	background-color: #96e064;
 	            }
+
+	            .phDump_table th.phDump_caption.object{
+	                background-color: #FF4445;
+	            }
+	            .phDump_table th.sideheader.object, .phDump_table th.phDump_caption.object:hover{
+	                background-color: #FF99AA;
+	            }
+	            .phDump_table th.sideheader.object:hover{
+	            	background-color: #ffbfc8;
+	            }
+
+
 	        </style>';
 	    return $html;
 	}
