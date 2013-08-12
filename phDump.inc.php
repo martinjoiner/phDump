@@ -83,6 +83,20 @@ class PhDump {
 	    } else if ( $varType == "object" ){
 	        $captionText = 'Object';
 	        $addClass .= " object";
+	        $objectVars = get_object_vars( $results );
+	        
+            foreach($objectVars as $key => $value){
+                $html .= $this->printTableRow($key,$value,$addClass);
+                $cntRows++;
+            }
+
+	        $classMethods =  get_class_methods( $results );
+
+	        for($i = 0; $i < sizeof($classMethods); $i++){
+	                $html .= $this->printTableRow( 'Method', $classMethods[$i], $addClass );
+	                 $cntRows++;
+	            }
+
 	    } else {
 	        $html .= $this->printTableRow($varType,$results);
 	        $cntRows++;
@@ -148,6 +162,7 @@ class PhDump {
 	            .phDumpWrap{ 
 	                font-family: arial, sans-serif;
 	                background-color: white;
+	                color: black;
 	            }
 	            .phDump_bool{
 	            	color: darkblue;
