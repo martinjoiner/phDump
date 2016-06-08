@@ -56,6 +56,7 @@ class PhDump {
 
 	private function printTable( $results ){
 	    $varType = gettype($results);
+	    $captionText = '';
 	    $addClass = '';
 	    $html = "";
 	    $html = '<table class="phDump_table CLASSPLACE"><tbody><tr><th class="phDump_caption CLASSPLACE" colspan="2" onClick="phDump_toggleTable(this)">INNERTEXT</th></tr>';
